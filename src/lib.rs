@@ -13,7 +13,7 @@ substreams_ethereum::init!();
 
 /// Extracts transfers events from the contract
 #[substreams::handlers::map]
-fn map_transfers(blk: eth::Block) -> Result<staking::Transfers, substreams::errors::Error> {
+fn map_stakings(blk: eth::Block) -> Result<staking::Transfers, substreams::errors::Error> {
     Ok(staking::Transfers {
         transfers: blk
             .events::<abis::stakingv1::events::Transfer>(&[&TRACKED_CONTRACT])
@@ -34,7 +34,7 @@ fn map_transfers(blk: eth::Block) -> Result<staking::Transfers, substreams::erro
 
 /// Store the total balance of NFT tokens for the specific TRACKED_CONTRACT by holder
 #[substreams::handlers::store]
-fn store_transfers(transfers: staking::Transfers, s: StoreAddInt64) {
+fn store_stakings(transfers: staking::Transfers, s: StoreAddInt64) {
     log::info!("Concave holders state builder");
     for transfer in transfers.transfers {
         if transfer.from != NULL_ADDRESS {

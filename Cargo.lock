@@ -742,20 +742,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rust-substream-example"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "ethabi 18.0.0",
- "getrandom",
- "hex-literal",
- "prost",
- "substreams",
- "substreams-ethereum 0.8.0",
- "substreams-ethereum 0.9.0",
-]
-
-[[package]]
 name = "rustc-hex"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -968,6 +954,20 @@ dependencies = [
  "quote",
  "syn",
  "thiserror",
+]
+
+[[package]]
+name = "substreams_concave"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "ethabi 18.0.0",
+ "getrandom",
+ "hex-literal",
+ "prost",
+ "substreams",
+ "substreams-ethereum 0.8.0",
+ "substreams-ethereum 0.9.0",
 ]
 
 [[package]]

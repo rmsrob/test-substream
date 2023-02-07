@@ -1,5 +1,5 @@
 [package]
-name = "rust-substream-example"
+name = "substreams_concave"
 version = "0.1.0"
 edition = "2021"
 
