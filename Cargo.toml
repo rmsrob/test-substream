@@ -1,0 +1,30 @@
+[package]
+name = "rust-substream-example"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "substreams"
+crate-type = ["cdylib"]
+
+
+[dependencies]
+substreams = "0.5.2"
+substreams-ethereum = "0.9.0"
+hex-literal = "0.3.4"
+ethabi = "18.0.0"
+prost = "0.11.6"
+
+
+[target.wasm32-unknown-unknown.dependencies]
+getrandom = { version = "0.2", features = ["custom"] }
+
+[build-dependencies]
+anyhow = "1"
+substreams-ethereum = "0.8"
+
+[profile.release]
+lto = true
+opt-level = 's'
+strip = "debuginfo"

@@ -1,0 +1,50 @@
+specVersion: v0.1.0
+package:
+  name: 'substreams_concave'
+  version: v0.1.0
+
+# Substreams consumes blocks and depends on a Substreams package matching the target blockchain.
+# The package is referenced by imports.
+imports:
+  eth: https://github.com/streamingfast/sf-ethereum/releases/download/v0.10.2/ethereum-v0.10.4.spkg
+
+# The protobuf.files contains a list of protobuf files for the current Substreams module.
+# contains the paths to the protobufs for the current Substreams module.
+protobuf:
+  files:
+    - concave/v1/staking.proto
+  importPaths:
+    - ./proto
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/substreams_concave.wasm
+
+# The modules are Rust functions containing the business logic for the module.
+
+# The map_stakings module extracts all ERC20 transfers related to a specific smart contract address. 
+# The module receives Ethereum blocks as sf.ethereum.type.v2.Block.
+# The output for the map_stakings module is a list of ERC20 transfers. 
+# The business logic for map_stakings module is written as a Rust function.
+# The store_stakings store module receives transfers in the blocks extracted by the mapper.
+# The store is a count of ERC20 tokens for a holder.
+
+# The inputs of the module are protobuf models defined as: proto:stakingv1.v1.Transfers
+# The stakingv1.v1.Transfers protobuf module represents a list of ERC20 transfers in a block.
+modules:
+  - name: map_stakings
+    kind: map
+    initialBlock: 10762783
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:concave.types.v1.Transfers
+
+  - name: store_stakings
+    kind: store
+    initialBlock: 10762783
+    updatePolicy: add
+    valueType: int64
+    inputs:
+      - map: map_stakings
