@@ -6,6 +6,7 @@ message Transfers {
   repeated Transfer transfers = 1;
 }
 
+// https://etherscan.io/address/0x93c3A816242E50Ea8871A29BF62cC3df58787FBD#events
 message Transfer {
   bytes from = 1;
   bytes to = 2;

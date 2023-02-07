@@ -24,7 +24,10 @@
 ```bash
 git clone git@github.com:ConcaveFi/substream-concave.git
 cd substream-concave
+cp .env.example .env
 ```
+
+Get a [substreams API KEY](https://substreams.streamingfast.io/reference-and-specs/authentication#obtain-your-api-key) and past it in the `.env`
 
 ### Generating Protobuf
 ```bash

@@ -11,7 +11,7 @@ const TRACKED_CONTRACT: [u8; 20] = hex!("93c3A816242E50Ea8871A29BF62cC3df58787FB
 
 substreams_ethereum::init!();
 
-/// Extracts transfers events from the contract
+// Extracts transfers events from the contract
 #[substreams::handlers::map]
 fn map_stakings(blk: eth::Block) -> Result<staking::Transfers, substreams::errors::Error> {
     Ok(staking::Transfers {
