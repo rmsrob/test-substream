@@ -1,14 +1,14 @@
 ![WIP](https://img.shields.io/badge/status-wip-red)
 
-[![Latest release](https://img.shields.io/github/v/release/ConcaveFi/substream-concave)](https://github.com/ConcaveFi/substream-concave/releases/latest)
-<a href="https://gitpod.io/#https://github.com/ConcaveFi/substream-concave" target="_blank">
+[![Latest release](https://img.shields.io/github/v/release/rrobrms/test-substream)](https://github.com/rrobrms/test-substream/releases/latest)
+<a href="https://gitpod.io/#https://github.com/rrobrms/test-substream" target="_blank">
   <img
     src="https://img.shields.io/badge/Open%20with-Gitpod-908a85?logo=gitpod"
     alt="Contribute with Gitpod"
   />
 </a>
 
-# substream-concave
+# substream-test
 
 > Tracking data for concave smart contracts
 
@@ -25,7 +25,7 @@
 > - [buf](https://docs.buf.build/installation)
 
 ```bash
-git clone git@github.com:ConcaveFi/substream-concave.git
+git clone git@github.com:rrobrms/test-substream.git
 # copie the .env.example to .env
 ```
 
