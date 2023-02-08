@@ -3,15 +3,19 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
+cmd-exists-%:
+	@hash $(*) > /dev/null 2>&1 || \
+		(echo "ERROR: '$(*)' must be installed and available on your PATH."; exit 1)
 
-MY_TOKEN := $(shell curl https://auth.streamingfast.io/v1/auth/issue -s --data-binary '{"api_key":"'${SF_APIKEY}'"}' | jq -r .token)
-export SUBSTREAMS_API_TOKEN=${MY_TOKEN}
-export FIREHOSE_API_TOKEN=${MY_TOKEN}
+SF_TOKEN := $(shell curl https://auth.streamingfast.io/v1/auth/issue -s --data-binary '{"api_key":"'${SF_APIKEY}'"}' | jq -r .token)
+export SUBSTREAMS_API_TOKEN=${SF_TOKEN}
+export FIREHOSE_API_TOKEN=${SF_TOKEN}
 
 
 .PHONY: gettoken
-gettoken:
-	@echo "Token set on FIREHOSE & SUBSTREAMS_API_TOKEN ${MY_TOKEN}\n\n"
+gettoken: cmd-exists-substreams
+	@echo "Token set on FIREHOSE & SUBSTREAMS_API_TOKEN ${SF_TOKEN}\n\n"
+	cargo check
 
 .PHONY: protogen
 protogen: gettoken
@@ -20,12 +24,14 @@ protogen: gettoken
 .PHONY: build
 build: protogen
 	cargo build --target wasm32-unknown-unknown --release
-	ls -l ./target/wasm32-unknown-unknown/release/substreams_concave.wasm
+	@ echo "CHECKING RELEASE"
+	@ls -l ./target/wasm32-unknown-unknown/release/substreams_concave.wasm
+	@ echo "\n"
 
-.PHONY: stream
-stream: build
+.PHONY: run
+run: build
 	substreams run -e $(ENDPOINT) substreams.yaml map_stakings -s $(START_BLOCK) -t $(STOP_BLOCK)
 
-# .PHONY: stream
-# package: build
-# 	substreams package substreams.yaml
+.PHONY: package
+package: build
+	substreams pack -o substreams.spkg substreams.yaml

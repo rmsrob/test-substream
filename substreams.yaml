@@ -2,11 +2,15 @@ specVersion: v0.1.0
 package:
   name: 'substreams_concave'
   version: v0.1.0
+  url: https://github.com/rrobrms/test-substream
 
 # Substreams consumes blocks and depends on a Substreams package matching the target blockchain.
 # The package is referenced by imports.
 imports:
+  # entity: https://github.com/streamingfast/substreams-entity-change/releases/download/v0.2.1/substreams-entity-change-v0.2.1.spkg
+  # eth: https://github.com/streamingfast/substreams-playground/releases/download/v0.5.5/eth-block-producers-v0.5.5.spkg
   eth: https://github.com/streamingfast/sf-ethereum/releases/download/v0.10.2/ethereum-v0.10.4.spkg
+  # eth: https://github.com/streamingfast/substreams-template/releases/download/v0.2.0/substreams-template-v0.2.0.spkg
 
 # The protobuf.files contains a list of protobuf files for the current Substreams module.
 # contains the paths to the protobufs for the current Substreams module.

@@ -2,15 +2,48 @@ syntax = "proto3";
 
 package concave.types.v1;
 
+message BigInt {
+  string value = 1;
+}
+
+message BigDecimal {
+  string value = 1;
+}
+
 message Transfers {
   repeated Transfer transfers = 1;
 }
 
-// https://etherscan.io/address/0x93c3A816242E50Ea8871A29BF62cC3df58787FBD#events
 message Transfer {
   bytes from = 1;
   bytes to = 2;
   uint64 token_id = 3;
   bytes trx_hash = 4;
   uint64 ordinal = 5;
+}
+
+message Lock {
+  repeated BigInt amount = 1;
+  uint64 poolID = 2;
+  uint64 tokenId = 3;
+  bytes sender = 4;
+}
+
+message Unlock {
+  repeated BigInt amount = 1;
+  uint64 poolID = 2;
+  bytes owner = 3;
+}
+
+message PoolRewarded {
+  uint64 poolID = 1;
+  repeated BigInt baseObligation = 2;
+  repeated BigInt excessObligation = 3;
+  repeated BigInt balance = 4;
+}
+
+message Rebase {
+  repeated BigInt eStakers = 1;
+  repeated BigInt eCOOP = 2;
+  repeated BigInt CNVS = 3;
 }
